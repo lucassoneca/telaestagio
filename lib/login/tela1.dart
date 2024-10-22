@@ -16,11 +16,12 @@ class _LoginState extends State<Login> {
       body: Padding(padding: EdgeInsets.all(16.0),
         child: Center(
           child: Column(
+
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(
-                  width: 400,
-                  height: 450,
+                  width: 500,
+                  height: 550,
                   child: Container(
                     decoration: BoxDecoration(
                       color: Colors.white, // cor da box
@@ -30,7 +31,7 @@ class _LoginState extends State<Login> {
                           color: Colors.grey.withOpacity(0.5),
                           spreadRadius: 1, // Espalhamento da sombra
                           blurRadius: 7, // Desfoque da sombra
-                          offset: Offset(0, 3), // Deslocamento horizontal e vertical da sombra
+                          offset: Offset(0, 4), // Deslocamento horizontal e vertical da sombra
                         )
                       ]
                     ),
@@ -39,6 +40,19 @@ class _LoginState extends State<Login> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
+                          Container(
+                            child: Image.asset('images/imagessemob.png'),
+                          ),
+                          SizedBox(height: 20),
+                          Text(
+                            'Entrar',
+                            style: TextStyle(
+                              fontSize: 28, // Tamanho da fonte
+                              fontWeight: FontWeight.normal, // Negrito
+                              color: Colors.black, // Cor do texto
+                            ),
+                          ),
+                          SizedBox(height: 20),
                     TextFormField(
                       autofocus: true,
                       keyboardType: TextInputType.text,
