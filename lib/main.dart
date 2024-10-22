@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'login/tela1.dart';
+import 'package:telaestagio/login/tela1.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home: Login(title: 'teste',),
+      home: Login(),
     );
   }
 }
