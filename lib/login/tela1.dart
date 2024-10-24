@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../home/home.dart';
+
 class Login extends StatefulWidget {
   const Login({super.key});
 
@@ -147,6 +149,10 @@ class _LoginState extends State<Login> {
       margin: const EdgeInsets.only(left: 5),
       child: ElevatedButton(
         onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const home()),
+          );
           // Lógica para 'entrar'
         },
         style: ElevatedButton.styleFrom(
