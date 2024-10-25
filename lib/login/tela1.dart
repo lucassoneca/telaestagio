@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../home/home.dart';
 
 class Login extends StatefulWidget {
@@ -151,9 +150,8 @@ class _LoginState extends State<Login> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const home()),
-          );
-          // Lógica para 'entrar'
+            MaterialPageRoute(builder: (context) => const Home()),
+          );  // Lógica para 'entrar'
         },
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.blue,
