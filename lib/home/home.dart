@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../login/tela1.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -22,33 +23,35 @@ class _HomeState extends State<Home> {
         ),
         actions: [
       Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: Container (
+        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+        child: DropdownButtonHideUnderline (
           child: ValueListenableBuilder(
             valueListenable: dropValue, builder: (BuildContext context, String value, _) {
               return DropdownButton<String>(
+                dropdownColor: Colors.blue,
                 style: TextStyle(
                   fontSize: 18,
                   color: Colors.white,
                   fontWeight: FontWeight.bold
                 ),
+                alignment: Alignment.center,
                 icon: RotatedBox(
-                  quarterTurns: 1,
-                  child: Icon(/*codigo aqui*/Icons.access_alarm),
+                  quarterTurns: 4,
+                  child: Icon(Icons.arrow_drop_down, size: 35,),
                 ),
                 value: (value.isEmpty) ? null: value,
                 onChanged: (escolha) => dropValue.value = escolha.toString(),
                 items: dropOpcoes.map((opcao) => DropdownMenuItem(
                     child: Text(opcao ),
                     value: opcao,
-                ),).toList()
-              );
-          },
-          )
+                  ),).toList()
+                );
+              },
+            )
           ),
         ),
       Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        padding: const EdgeInsets.symmetric(horizontal: 10.0),
           child: Container(
             child: Text(
               'Manutenção',
@@ -61,7 +64,7 @@ class _HomeState extends State<Home> {
           ),
         ),
       Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        padding: const EdgeInsets.symmetric(horizontal: 10.0),
           child: Container(
             child: Text(
               'Vistoria',
@@ -74,7 +77,7 @@ class _HomeState extends State<Home> {
           ),
         ),
       Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        padding: const EdgeInsets.symmetric(horizontal: 10.0),
           child: Container(
             child: Text(
               'Materiais',
@@ -82,6 +85,25 @@ class _HomeState extends State<Home> {
               fontSize: 18,
               color: Colors.white,
               fontWeight: FontWeight.bold
+              ),
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          child: TextButton(
+            onPressed: () { // Volta para a tela de login
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const Login()),
+              );
+            },
+            child: Text(
+              'Deslogar',
+              style: TextStyle(
+                fontSize: 18,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),

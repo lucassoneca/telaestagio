@@ -131,7 +131,7 @@ class _LoginState extends State<Login> {
                   fontSize: 16,
                   color: Colors.blue,
                   decoration: isHovered
-                      ? TextDecoration.underline // Sublinhado ao passar o mouse
+                      ? TextDecoration.underline// Sublinhado ao passar o mouse
                       : TextDecoration.none, // Sem sublinhado normalmente
                 ),
               ),
