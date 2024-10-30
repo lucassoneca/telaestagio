@@ -99,7 +99,7 @@ class _HomeState extends State<Home> {
               );
             },
             child: Text(
-              'Deslogar',
+              'Deslogar ',
               style: TextStyle(
                 fontSize: 18,
                 color: Colors.white,
