@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../Mapa/mapa.dart';
 import '../login/tela1.dart';
 
 class Home extends StatefulWidget {
@@ -14,7 +15,8 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Container(
+      child: Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
         leading: Padding(
@@ -22,8 +24,7 @@ class _HomeState extends State<Home> {
           child: Image.asset('images/onibus.png'),
         ),
         actions: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          Container(
             child: DropdownButtonHideUnderline(
               child: ValueListenableBuilder(
                 valueListenable: dropValue,
@@ -53,14 +54,44 @@ class _HomeState extends State<Home> {
               ),
             ),
           ),
-          _buildAppBarButton('Manutenção'),
-          _buildAppBarButton('Vistoria'),
-          _buildAppBarButton('Materiais'),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+
+          SizedBox(width: 10),
+
+          Container(
+            child: Text('Manutenção',
+            style: TextStyle(
+              fontSize: 18,
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),),
+          ),
+
+          SizedBox(width: 20),
+
+          Container(
+            child: Text('Vistoria',
+              style: TextStyle(
+                fontSize: 18,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),),
+          ),
+
+          SizedBox(width: 20),
+
+          Container(
+            child: Text('Materiais',
+              style: TextStyle(
+                fontSize: 18,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),),
+          ),
+
+          SizedBox(width: 20),
+          Container(
             child: TextButton(
-              onPressed: () {
-                // Volta para a tela de login
+              onPressed: () {// Volta para a tela de login
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (context) => const Login()),
@@ -79,10 +110,10 @@ class _HomeState extends State<Home> {
         ],
       ),
       body: Container(
-        child: Container(
+          color: Colors.red,
           height: 500,
           width: 600,
-          margin: EdgeInsets.all(150),
+          margin: EdgeInsets.all(100),
           child: Column(
             children: [
               Text(
@@ -93,61 +124,52 @@ class _HomeState extends State<Home> {
                   fontWeight: FontWeight.bold
                 ),
               ),
-              Text(
-                'Cadastre novas paradas, ative e desative, cadastre vistorias e manutenções de qualquer lugar, rápido e fácil',
+              const Text(
+                'Cadastre novas paradas, ative e desative, cadastre vistorias e manutenções de qualquer lugar, rápido e fácil.',
                 style: TextStyle(
                   fontSize: 20,
                   color: Colors.black,
-
                 ),
               ),
 
               SizedBox(height: 20),
 
-              Padding(
-                padding: EdgeInsets.all(0),
-                child: ElevatedButton(
-                  onPressed: () {
-                    print("Botão pressionado" );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.amber[400],
-                    padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(35),
-                    ),
-                  ),
-                  child: Text(
-                    'Mapa',
-                    style: TextStyle(
-                      color: Colors.blue,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
+              Container(
+                child: Padding(
+                    padding: EdgeInsets.all(0),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => const mapa()),
+                          );  // Lógica para 'Mapa' (botão)
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.amber[400],
+                          padding: EdgeInsets.symmetric(horizontal: 70, vertical: 20),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(35),
+                          ),
+                        ),
+                        child: const Text(
+                          'Mapa',
+                          style: TextStyle(
+                            color: Colors.blue,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    )
                   ),
                 ),
-              )
-            ],
+              ],
           ),
-        ),
-      ),
-      backgroundColor: Colors.white70,
-    );
-  }
-
-  Padding _buildAppBarButton(String text) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10.0),
-      child: Container(
-        child: Text(
-          text,
-          style: TextStyle(
-            fontSize: 18,
-            color: Colors.white,
-            fontWeight: FontWeight.w400,
+            ),
+        backgroundColor: Colors.white70,
           ),
-        ),
-      ),
-    );
+      );
   }
 }
