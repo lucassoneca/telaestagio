@@ -15,62 +15,62 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       backgroundColor: CupertinoColors.tertiarySystemGroupedBackground,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                width: 550,
-                height: 600,
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white, // Cor da box
-                    borderRadius: BorderRadius.circular(10), // Borda arredondada
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 1, // Espalhamento da sombra
-                        blurRadius: 7, // Desfoque da sombra
-                        offset: const Offset(0, 4), // Deslocamento da sombra
-                      )
+          child: SingleChildScrollView( // Permite rolagem se o conteúdo exceder a tela
+            child: SizedBox(
+              width: screenWidth > 600 ? 550 : screenWidth * 0.9, // Largura responsiva
+              height: screenHeight > 600 ? 600 : screenHeight * 0.8, // Altura responsiva
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white, // Cor da box
+                  borderRadius: BorderRadius.circular(10), // Borda arredondada
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 1, // Espalhamento da sombra
+                      blurRadius: 7, // Desfoque da sombra
+                      offset: const Offset(0, 4), // Deslocamento da sombra
+                    )
+                  ],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(50),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(2), // Usar Padding ao redor da imagem
+                        child: Image.asset('images/imagessemob.png'),
+                      ),
+                      const SizedBox(height: 20),
+                      Text(
+                        'Entrar',
+                        style: TextStyle(
+                          fontSize: 28, // Tamanho da fonte
+                          fontWeight: FontWeight.bold, // Negrito
+                          color: Colors.black, // Cor do texto
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      _buildTextField('Nome de usuário ou e-mail', false),
+                      const SizedBox(height: 25),
+                      _buildTextField('Senha', true),
+                      const SizedBox(height: 15),
+                      _buildRememberMeRow(),
+                      const SizedBox(height: 30),
+                      _buildLoginButton(),
                     ],
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(50),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(2), // Usar Padding ao redor da imagem
-                          child: Image.asset('images/imagessemob.png'),
-                        ),
-                        const SizedBox(height: 20),
-                        Text(
-                          'Entrar',
-                          style: TextStyle(
-                            fontSize: 28, // Tamanho da fonte
-                            fontWeight: FontWeight.bold, // Negrito
-                            color: Colors.black, // Cor do texto
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                        _buildTextField('Nome de usuário ou e-mail', false),
-                        const SizedBox(height: 25),
-                        _buildTextField('Senha', true),
-                        const SizedBox(height: 15),
-                        _buildRememberMeRow(),
-                        const SizedBox(height: 30),
-                        _buildLoginButton(),
-                      ],
-                    ),
                   ),
                 ),
               ),
-            ],
+            ),
           ),
         ),
       ),
@@ -131,7 +131,7 @@ class _LoginState extends State<Login> {
                   fontSize: 16,
                   color: Colors.blue,
                   decoration: isHovered
-                      ? TextDecoration.underline// Sublinhado ao passar o mouse
+                      ? TextDecoration.underline // Sublinhado ao passar o mouse
                       : TextDecoration.none, // Sem sublinhado normalmente
                 ),
               ),

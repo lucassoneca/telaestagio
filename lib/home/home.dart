@@ -89,6 +89,7 @@ class _HomeState extends State<Home> {
           ),
 
           SizedBox(width: 20),
+
           Container(
             child: TextButton(
               onPressed: () {// Volta para a tela de login
@@ -109,67 +110,66 @@ class _HomeState extends State<Home> {
           ),
         ],
       ),
-      body: Container(
-          color: Colors.red,
-          height: 500,
-          width: 600,
-          margin: EdgeInsets.all(100),
-          child: Column(
-            children: [
-              Text(
-                'Bem-vindo ao Sistema de Pontos de Paradas',
+      body: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Container(
+              height: 500,
+              width: 600,
+              child: RichText(
+                text: TextSpan(
+                  text: 'Bem-vindo ao Sistema de Pontos de Paradas\n',
                 style: TextStyle(
-                  fontSize: 70,
-                  color: Colors.lightBlue[900],
-                  fontWeight: FontWeight.bold
-                ),
-              ),
-              const Text(
-                'Cadastre novas paradas, ative e desative, cadastre vistorias e manutenções de qualquer lugar, rápido e fácil.',
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.black,
-                ),
-              ),
-
-              SizedBox(height: 20),
-
-              Container(
-                child: Padding(
-                    padding: EdgeInsets.all(0),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
+                    fontSize: 70,
+                    color: Colors.lightBlue[900],
+                    ),
+                  children: [
+                    TextSpan(
+                      text: 'Cadastre novas paradas, ative e desative, cadastre vistorias e manutenções de qualquer lugar, rápido e fácil.\n',
+                      style: TextStyle(fontSize: 20,
+                        color: Colors.black,
+                      ),
+                    ),
+                    WidgetSpan(
                       child: ElevatedButton(
-                        onPressed: () {
+                        onPressed: (){
                           Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => const mapa()),
-                          );  // Lógica para 'Mapa' (botão)
+                              context,
+                              MaterialPageRoute(builder: (context) => const mapa()),
+                          );
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.amber[400],
-                          padding: EdgeInsets.symmetric(horizontal: 70, vertical: 20),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(35),
-                          ),
+                            backgroundColor: Colors.amber[400],
+                            padding: EdgeInsets.symmetric(horizontal: 70, vertical: 20),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(35),
+                            ),
                         ),
-                        child: const Text(
-                          'Mapa',
-                          style: TextStyle(
-                            color: Colors.blue,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        child: Text("Mapa",
+                        style: TextStyle(
+                          color: Colors.blue,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
                         ),
-                      ),
+                        ),
+                      )
                     )
+
+                  ],
                   ),
                 ),
-              ],
-          ),
+              ),
+            Container(
+              child: Padding(
+                  padding: const EdgeInsets.all(2), // Usar Padding ao redor da imagem
+                  child: Image.asset('images/paradaponto.png'),
+              ),
             ),
-        backgroundColor: Colors.white70,
-          ),
+          ],
+        ),
+      )
+      ),
       );
   }
 }
