@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:telaestagio/login/tela1.dart';
+import 'package:telaestagio/login/login.dart';
 
 
 void main() {

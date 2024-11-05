@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../login/recsenha.dart';
 import '../home/home.dart';
 
 class Login extends StatefulWidget {
@@ -80,7 +81,7 @@ class _LoginState extends State<Login> {
   Widget _buildTextField(String label, bool isPassword) {
     return TextFormField(
       autofocus: true,
-      obscureText: isPassword, // Senha oculta
+      obscureText: isPassword, // ocultar Senha
       keyboardType: TextInputType.text,
       style: const TextStyle(fontSize: 18),
       decoration: InputDecoration(
@@ -123,7 +124,9 @@ class _LoginState extends State<Login> {
             },
             child: InkWell(
               onTap: () {
-                print('link clicado: Esqueceu sua senha?');
+                Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const recSenha()),
+                );
               },
               child: Text(
                 'Esqueceu sua senha?',
