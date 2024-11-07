@@ -25,9 +25,11 @@ class _LoginState extends State<Login> {
         padding: const EdgeInsets.all(16.0),
         child: Center(
           child: SingleChildScrollView( // Permite rolagem se o conteúdo exceder a tela
-            child: SizedBox(
-              width: screenWidth > 600 ? 550 : screenWidth * 0.9, // Largura responsiva
-              height: screenHeight > 600 ? 600 : screenHeight * 0.8, // Altura responsiva
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                maxWidth: screenWidth > 600 ? 550 : screenWidth * 0.9, //largura responsiva
+                maxHeight: screenHeight > 600 ? 600 : screenHeight * 0.8, //altura responsi
+              ),
               child: Container(
                 decoration: BoxDecoration(
                   color: Colors.white, // Cor da box
@@ -94,61 +96,62 @@ class _LoginState extends State<Login> {
 
   Widget _buildRememberMeRow() {
     return Container(
-      child: Row(
+      child: Wrap(
         children: [
-          Checkbox(
-            value: isChecked,
-            activeColor: Colors.blue,
-            onChanged: (newBool) {
-              setState(() {
-                isChecked = newBool; // Não é mais null
-              });
-            },
-          ),
-          const SizedBox(width: 2), // Espaço entre o Checkbox e o texto
-          const Text(
-            'Lembre-se de mim',
-            style: TextStyle(fontSize: 16),
-          ),
-          const Spacer(),
+              Checkbox(
+                value: isChecked,
+                activeColor: Colors.blue,
+                onChanged: (newBool) {
+                  setState(() {
+                    isChecked = newBool ?? false;
+                  });
+                },
+              ),
+              Text(
+                'Lembre-se de mim',
+                style: TextStyle(fontSize: 16),
+              ),
+          SizedBox(width: 120,),
           MouseRegion(
             onEnter: (_) {
               setState(() {
-                isHovered = true; // Mouse está sobre o texto
+                isHovered = true;
               });
             },
             onExit: (_) {
               setState(() {
-                isHovered = false; // Mouse não está mais sobre o texto
+                isHovered = false;
               });
             },
             child: InkWell(
               onTap: () {
-                Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const recSenha()),
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const recSenha()),
                 );
               },
+
               child: Text(
                 'Esqueceu sua senha?',
                 style: TextStyle(
                   fontSize: 16,
                   color: Colors.blue,
                   decoration: isHovered
-                      ? TextDecoration.underline // Sublinhado ao passar o mouse
-                      : TextDecoration.none, // Sem sublinhado normalmente
+                      ? TextDecoration.underline
+                      : TextDecoration.none,
                 ),
               ),
             ),
           ),
-        ],
-      ),
+      ],
+    )
     );
   }
 
   Widget _buildLoginButton() {
     return Container(
       alignment: Alignment.bottomLeft,
-      margin: const EdgeInsets.only(left: 5),
+      margin: const EdgeInsets.only(left: 0),
       child: ElevatedButton(
         onPressed: () {
           Navigator.push(
@@ -164,7 +167,7 @@ class _LoginState extends State<Login> {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(10),
+          padding: const EdgeInsets.all(8),
           child: const Text(
             'Entrar',
             style: TextStyle(fontSize: 16, color: Colors.white),
