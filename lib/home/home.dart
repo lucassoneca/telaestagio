@@ -81,54 +81,60 @@ class _HomeState extends State<Home> {
         ],
       ),
       body: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        child: Wrap(
           children: [
             Container(
-              height: 500,
-              width: 600,
-              child: RichText(
-                text: TextSpan(
-                  text: 'Bem-vindo ao Sistema de Pontos de Paradas\n',
-                  style: TextStyle(
-                    fontSize: 70,
-                    color: Colors.lightBlue[900],
-                  ),
-                  children: [
-                    const TextSpan(
-                      text: 'Cadastre novas paradas, ative e desative, cadastre vistorias e manutenções de qualquer lugar, rápido e fácil.\n',
-                      style: TextStyle(fontSize: 20, color: Colors.black),
+              alignment: Alignment.center,
+              height: MediaQuery.of(context).size.height * 0.8,
+              width: MediaQuery.of(context).size.width * 0.35,
+              child: SingleChildScrollView(
+                child: RichText(
+                  text: TextSpan(
+                    text: 'Bem-vindo ao Sistema de Pontos de Paradas\n',
+                    style: TextStyle(
+                      fontSize: 70,
+                      color: Colors.lightBlue[900],
                     ),
-                    WidgetSpan(
-                      child: ElevatedButton(
-                        onPressed: () {
-                          //link para deixar o botão na tela 'clicável' e redirecionar para a tela do mapa
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => const mapa()));
-                        },
-                        style: ElevatedButton.styleFrom( //estilização do botão
-                          backgroundColor: Colors.amber[300],
-                          padding: const EdgeInsets.symmetric(horizontal: 70, vertical: 20),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(35),
-                          ),
-                        ),
-                        child: const Text(
-                          "Mapa",
-                          style: TextStyle(
-                            color: Colors.blue,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+                    children: [
+                      const TextSpan(
+                        text: 'Cadastre novas paradas, ative e desative, cadastre vistorias e manutenções de qualquer lugar, rápido e fácil.\n',
+                        style: TextStyle(fontSize: 20, color: Colors.black),
                       ),
-                    )
-                  ],
+                      WidgetSpan(
+                        child: ElevatedButton(
+                          onPressed: () {
+                            //link para deixar o botão na tela 'clicável' e redirecionar para a tela do mapa
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => const mapa()));
+                          },
+                          style: ElevatedButton.styleFrom( //estilização do botão
+                            backgroundColor: Colors.amber[300],
+                            padding: const EdgeInsets.symmetric(horizontal: 70, vertical: 20),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(35),
+                            ),
+                          ),
+                          child: const Text(
+                            "Mapa",
+                            style: TextStyle(
+                              color: Colors.blue,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
-              ),
+              ) ,
             ),
-            Padding(
-              padding: const EdgeInsets.all(2),
-              child: Image.asset('images/paradaponto.png'), // Imagem de ponto de parada
+            Container(
+              alignment: Alignment.center,
+              width: MediaQuery.of(context).size.width * 0.5,
+              height: MediaQuery.of(context).size.height * 0.8,
+              child: SingleChildScrollView(
+                child: Image.asset('images/paradaponto.png'), // Imagem de ponto de parada
+              )
             ),
           ],
         ),
