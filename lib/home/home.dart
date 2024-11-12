@@ -43,7 +43,7 @@ class _HomeState extends State<Home> {
                   onChanged: (escolha) {
                     dropValue.value = escolha.toString();
                     if (escolha == 'Mapa') {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const mapa()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => mapa()));
                     } else if (escolha == 'Manter paradas') {
                       Navigator.push(context, MaterialPageRoute(builder: (context) => const Home()));
                     }
@@ -104,7 +104,7 @@ class _HomeState extends State<Home> {
                         child: ElevatedButton(
                           onPressed: () {
                             //link para deixar o botão na tela 'clicável' e redirecionar para a tela do mapa
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => const mapa()));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => mapa()));
                           },
                           style: ElevatedButton.styleFrom( //estilização do botão
                             backgroundColor: Colors.amber[300],
