@@ -43,7 +43,7 @@ class _HomeState extends State<Home> {
                   onChanged: (escolha) {
                     dropValue.value = escolha.toString();
                     if (escolha == 'Mapa') {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => mapa()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => Mapa()));
                     } else if (escolha == 'Manter paradas') {
                       Navigator.push(context, MaterialPageRoute(builder: (context) => const Home()));
                     }
@@ -104,7 +104,7 @@ class _HomeState extends State<Home> {
                         child: ElevatedButton(
                           onPressed: () {
                             //link para deixar o botão na tela 'clicável' e redirecionar para a tela do mapa
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => mapa()));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => Mapa()));
                           },
                           style: ElevatedButton.styleFrom( //estilização do botão
                             backgroundColor: Colors.amber[300],
@@ -129,12 +129,12 @@ class _HomeState extends State<Home> {
               ) ,
             ),
             Container(
-              alignment: Alignment.center,
-              width: MediaQuery.of(context).size.width * 0.5,
-              height: MediaQuery.of(context).size.height * 0.8,
-              child: SingleChildScrollView(
-                child: Image.asset('images/paradaponto.png'), // Imagem de ponto de parada
-              )
+                alignment: Alignment.center,
+                width: MediaQuery.of(context).size.width * 0.5,
+                height: MediaQuery.of(context).size.height * 0.8,
+                child: SingleChildScrollView(
+                  child: Image.asset('images/paradaponto.png'), // Imagem de ponto de parada
+                )
             ),
           ],
         ),
