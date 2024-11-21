@@ -17,6 +17,7 @@ dependencies:
   flutter_map_marker_popup: ^7.0.0
   flutter_launcher_icons: ^0.14.1
   flutter_map_cancellable_tile_provider: ^3.0.2
+  font_awesome_flutter: ^10.4.0
 
 dev_dependencies:
   flutter_test:
