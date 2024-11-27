@@ -65,192 +65,210 @@ class _MapaState extends State<Mapa> {
                       value: opcao,
                       child: Text(opcao),
                     );
-                  }).toList(),
-                );
-              },
-            ),
-          ),
-          const SizedBox(width: 10),
-          _buildAppBarText('Manutenção', context),
-          const SizedBox(width: 20),
-          _buildAppBarText('Vistoria', context),
-          const SizedBox(width: 20),
-          _buildAppBarText('Materiais', context),
-          const SizedBox(width: 20),
-          TextButton(
-            onPressed: () { //botão 'deslogar' para voltar para a página de login
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const Home()));
+                  }
+                ).toList(),
+              );
             },
-            child: const Text(
-              'Voltar',
-              style: TextStyle(
-                fontSize: 18,
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
+          ),
+        ),
+        const SizedBox(width: 10),
+        _buildAppBarText('Manutenção', context),
+        const SizedBox(width: 20),
+        _buildAppBarText('Vistoria', context),
+        const SizedBox(width: 20),
+        _buildAppBarText('Materiais', context),
+        const SizedBox(width: 20),
+        TextButton(
+          onPressed: () { //botão 'deslogar' para voltar para a página de login
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const Home()));
+          },
+          child: const Text(
+            'Voltar',
+            style: TextStyle(
+              fontSize: 18,
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
             ),
           ),
-        ],
-      ),
-      body:
-        FutureBuilder<List<Pontos>>(
-          future: _pontosFuture,
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
-              }
+        ),
+      ],
+    ),
+    body:
+      FutureBuilder<List<Pontos>>(
+        future: _pontosFuture,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            }
 
-              if (snapshot.hasError) {
-                return Center(child: Text('Erro: ${snapshot.error}'));
-              }
+            if (snapshot.hasError) {
+              return Center(child: Text('Erro: ${snapshot.error}'));
+            }
 
-              if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                return const Center(child: Text('Nenhum ponto encontrado.'));
-              }
+            if (!snapshot.hasData || snapshot.data!.isEmpty) {
+              return const Center(child: Text('Nenhum ponto encontrado.'));
+            }
 
-                final pontos = snapshot.data!;
+              final pontos = snapshot.data!;
 
-                return
-                  Center(
-                    child: Container(
-                      child: PopupScope(
-                        popupController: _popupController, // Adiciona PopupScope ao contexto
-                        child: FlutterMap(
-                          options: MapOptions(
-                            initialCenter: LatLng(-15.7801, -47.9292),
-                            initialZoom: 16,
-                            onTap: (_, __) => _popupController.hideAllPopups(),
+              return
+                Center(
+                  child: Container(
+                    child: PopupScope(
+                      popupController: _popupController, // Adiciona PopupScope ao contexto
+                      child: FlutterMap(
+                        options: MapOptions(
+                          initialCenter: LatLng(-15.7801, -47.9292),
+                          initialZoom: 16,
+                          onTap: (_, __) => _popupController.hideAllPopups(),
+                        ),
+                        children: [
+                          TileLayer(
+                            urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                            userAgentPackageName: 'com.example.app',
+                            tileProvider: CancellableNetworkTileProvider(),
                           ),
-                          children: [
-                            TileLayer(
-                              urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                              userAgentPackageName: 'com.example.app',
-                              tileProvider: CancellableNetworkTileProvider(),
-                            ),
-                            MarkerClusterLayerWidget(
-                              options: MarkerClusterLayerOptions(
-                                maxClusterRadius: 250,
-                                markers: pontos.map((ponto) {
-                                  return Marker(
-                                    point: ponto.point,
-                                    width: 40,
-                                    height: 40,
-                                    child: const Icon(
-                                      Icons.pin_drop,
-                                      color: Colors.blue,
+                          MarkerClusterLayerWidget(
+                            options: MarkerClusterLayerOptions(
+                              maxClusterRadius: 250,
+                              markers: pontos.map((ponto) {
+                                return Marker(
+                                  point: ponto.point,
+                                  width: 40,
+                                  height: 40,
+                                  child: const Icon(
+                                    Icons.pin_drop,
+                                    color: Colors.blue,
+                                  ),
+                                );
+                              }
+                            ).toList(),
+                            builder: (context, cluster) {
+                              return Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50),
+                                  color: Colors.blue,
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    '${cluster.length}',
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 14,
                                     ),
-                                  );
-                                }).toList(),
-                                builder: (context, cluster) {
-                                  return Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(50),
-                                      color: Colors.blue,
-                                    ),
-                                    child: Center(
-                                      child: Text(
-                                        '${cluster.length}',
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 14,
+                                  ),
+                                ),
+                              );
+                            },
+                            popupOptions: PopupOptions(
+                              popupController: _popupController,
+                              popupBuilder: (context, marker) {
+                                final ponto = pontos.firstWhere(
+                                  (p) => p.point == marker.point,
+                                );
+                                return Card(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min, // Ajusta a altura ao conteúdo
+                                      children: [
+                                        Text(
+                                          'Código: ${ponto.codDftrans}',
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                         ),
-                                      ),
-                                    ),
-                                  );
-                                },
-                                popupOptions: PopupOptions(
-                                  popupController: _popupController,
-                                  popupBuilder: (context, marker) {
-                                    final ponto = pontos.firstWhere(
-                                          (p) => p.point == marker.point,
-                                    );
-                                    return Card(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.min, // Ajusta a altura ao conteúdo
+                                        const SizedBox(height: 4),
+                                        Text('Sentido: (${ponto.sentido})'),
+                                        const SizedBox(height: 4),
+                                        Wrap(
+                                          spacing: 20.0, // Espaço horizontal entre os widgets
+                                          runSpacing: 7.0, // Espaço vertical entre as linhas
                                           children: [
-                                            Text(
-                                              'Código: ${ponto.codDftrans}',
-                                              style: const TextStyle(
-                                                fontWeight: FontWeight.bold,
+                                            InkWell(
+                                              child: Text(
+                                                'Editar',
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.bold,
+                                                  decoration: TextDecoration.underline,
+                                                ),
                                               ),
+                                              onTap: () {
+                                                print('edit teste');
+                                              },
                                             ),
-                                            const SizedBox(height: 4),
-                                            Text('Sentido: (${ponto.sentido})'),
-                                            const SizedBox(height: 4),
-                                            Wrap(
-                                              spacing: 20.0, // Espaço horizontal entre os widgets
-                                              runSpacing: 7.0, // Espaço vertical entre as linhas
-                                              children: [
-                                                InkWell(
-                                                  child: Text(
-                                                    'Editar',
-                                                    style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontWeight: FontWeight.bold,
-                                                      decoration: TextDecoration.underline,
-                                                    ),
-                                                  ),
-                                                  onTap: () {
-                                                    print('edit teste');
-                                                  },
+                                            InkWell(
+                                              child: Text(
+                                                'Desativar',
+                                                style: TextStyle(
+                                                  color: Colors.red,
+                                                  fontWeight: FontWeight.bold,
+                                                  decoration: TextDecoration.underline,
                                                 ),
-                                                InkWell(
-                                                  child: Text(
-                                                    'Desativar',
-                                                    style: TextStyle(
-                                                      color: Colors.red,
-                                                      fontWeight: FontWeight.bold,
-                                                      decoration: TextDecoration.underline,
-                                                    ),
-                                                  ),
-                                                  onTap: () {
-                                                    print('delet teste');
-                                                  },
-                                                ),
-                                              ],
+                                              ),
+                                              onTap: () {
+                                                print('delet teste');
+                                              },
                                             ),
                                           ],
                                         ),
-                                      ),
-                                    );
-                                  },
-                                ),
-                              ),
-                            ),
-                            Container(
-                              child: Row(
-                                children: [
-                                  ElevatedButton(onPressed: (){
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
-                                  },
-                                    style: ElevatedButton.styleFrom(
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(70),
-                                      ),
-                                      padding: EdgeInsets.all(15),
-                                      backgroundColor: Colors.white,
-                                    ),
-                                    child: Icon(
-                                      Icons.arrow_back,
-                                      size: 50,
-                                      color: Colors.blue,
+                                      ],
                                     ),
                                   ),
-                                ],
-
+                                );
+                              },
+                            ),
+                          ),
+                        ),
+                        Container(
+                          child: Row(
+                            children: [
+                              ElevatedButton(onPressed: (){
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+                              },
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(70),
+                              ),
+                              padding: EdgeInsets.all(15),
+                              backgroundColor: Colors.white,
+                              ),
+                              child: Icon(
+                                Icons.arrow_back,
+                                size: 50,
+                                color: Colors.blue,
                               ),
                             ),
+                              Spacer(),
+                              Container(
+                                child: ElevatedButton(onPressed: (){
+                                  print('teste');
+                                },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.blue,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                  ), child: const Text('Ocultar paradas inativas',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            )
                           ],
                         ),
                       ),
-                    ),
-          );
-        },
-      ),
-    );
-  }
+                    ],
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
+      );
+    }
 
   // Função auxiliar para adicionar textos de AppBar
   Widget _buildAppBarText(String text, BuildContext context) {
