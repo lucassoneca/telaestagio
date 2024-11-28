@@ -208,7 +208,29 @@ class _MapaState extends State<Mapa> {
                                                 ),
                                               ),
                                               onTap: () {
-                                                print('delet teste');
+                                                showDialog(
+                                                  context: context,
+                                                  builder: (BuildContext context) {
+                                                    return AlertDialog(
+                                                      title: const Text('Deseja deletar este ponto de parada?'),
+                                                      actions: <Widget>[
+                                                        TextButton(
+                                                          onPressed: () {
+                                                            Navigator.of(context).pop();
+                                                          },
+                                                          child: const Text('Deletar'),
+                                                        ),
+                                                        const SizedBox(width: 20),
+                                                        TextButton(
+                                                          onPressed:() {
+                                                            Navigator.of(context).pop();
+                                                          },
+                                                          child: const Text('Cancelar'),
+                                                        ),
+                                                      ],
+                                                    );
+                                                  }
+                                                );
                                               },
                                             ),
                                           ],
