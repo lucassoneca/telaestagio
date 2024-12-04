@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:telaestagio/Mapa/adicionar_pontos.dart';
 
 class PontosParadaPage extends StatefulWidget {
   @override
@@ -94,7 +95,7 @@ class _PontosParadaPageState extends State<PontosParadaPage> {
               ElevatedButton(
                 onPressed: () {
                   // Lógica para adicionar um novo ponto de parada
-                  print("Adicionar ponto de parada");
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => adicionar()));
                 },
                 child: Text("Adicionar",
                   style: TextStyle(

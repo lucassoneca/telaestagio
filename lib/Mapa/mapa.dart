@@ -287,9 +287,10 @@ class _MapaState extends State<Mapa> {
                                   ),
                                 ),
                                 const SizedBox(height: 10),
-                                ElevatedButton(onPressed: (){
-                                  print('teste');
-                                },
+                                ElevatedButton(
+                                  onPressed: (){
+                                    print('teste');
+                                  },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.blue,
                                   shape: RoundedRectangleBorder(
