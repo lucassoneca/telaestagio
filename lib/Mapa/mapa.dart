@@ -3,6 +3,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:telaestagio/Mapa/pontos_parada.dart';
+import 'package:telaestagio/vistoria/historico.dart';
 import '../Manutencao/manutencao.dart';
 import '../home/home.dart';
 import '../materiais/materiais.dart';
@@ -181,6 +182,19 @@ class _MapaState extends State<Mapa> {
                                       const SizedBox(height: 4),
                                       Text('Sentido: (${ponto.sentido})'),
                                       const SizedBox(height: 4),
+                                      InkWell(
+                                        child: Text(
+                                          'Histórico de Vistorias',
+                                          style: TextStyle(
+                                            color: Colors.blue,
+                                            fontWeight: FontWeight.bold,
+                                            decoration: TextDecoration.underline,
+                                          ),
+                                        ),
+                                        onTap: () {
+                                          Navigator.push(context, MaterialPageRoute(builder: (context) => historico()));
+                                        },
+                                      ),
                                       Wrap(
                                         spacing: 20.0, // Espaço horizontal entre os widgets
                                         runSpacing: 7.0, // Espaço vertical entre as linhas
@@ -195,12 +209,12 @@ class _MapaState extends State<Mapa> {
                                               ),
                                             ),
                                             onTap: () {
-                                              print('edit teste');
+                                              print('edit ');
                                             },
                                           ),
                                           InkWell(
                                             child: Text(
-                                              'Desativar',
+                                              'Desetivar',
                                               style: TextStyle(
                                                 color: Colors.red,
                                                 fontWeight: FontWeight.bold,
@@ -212,13 +226,13 @@ class _MapaState extends State<Mapa> {
                                                 context: context,
                                                 builder: (BuildContext context) {
                                                   return AlertDialog(
-                                                    title: const Text('Deseja deletar este ponto de parada?'),
+                                                    title: const Text('Deseja desativar este ponto de parada?'),
                                                     actions: <Widget>[
                                                       TextButton(
                                                         onPressed: () {
                                                           Navigator.of(context).pop();
                                                         },
-                                                        child: const Text('Deletar'),
+                                                        child: const Text('Desativar'),
                                                       ),
                                                       const SizedBox(width: 20),
                                                       TextButton(

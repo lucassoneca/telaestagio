@@ -30,7 +30,7 @@ class _adicionarState extends State<adicionar> {
   }
 
   // Função para enviar o arquivo
-  /*Future<void> _uploadFile() async {
+  Future<void> _uploadFile() async {
     if (_filePath == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Nenhum arquivo selecionado!')),
@@ -69,7 +69,7 @@ class _adicionarState extends State<adicionar> {
         _isUploading = false;
       });
     }
-  }*/
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -107,14 +107,14 @@ class _adicionarState extends State<adicionar> {
                 child: Column(
                   children: [
                     const SizedBox(height: 20),
-                    Text('Latitude',
+                    const Text('Latitude',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
                       ),
                     ),
                     ConstrainedBox(
-                      constraints: BoxConstraints(
+                      constraints: const BoxConstraints(
                         maxWidth: 450, // Largura máxima
                       ),
                       child: TextField(
@@ -126,19 +126,19 @@ class _adicionarState extends State<adicionar> {
                             borderSide: BorderSide.none, // Remove a borda padrão
                           ),
                         ),
-                        style: TextStyle(fontSize: 16), // Estilo do texto digitado
+                        style: const TextStyle(fontSize: 16), // Estilo do texto digitado
                       ),
                     ),
 
                     const SizedBox(height: 20),
-                    Text('Longitude',
+                    const Text('Longitude',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
                       ),
                     ),
                     ConstrainedBox(
-                      constraints: BoxConstraints(
+                      constraints: const BoxConstraints(
                         maxWidth: 450, // Largura máxima
                       ),
                       child: TextField(
@@ -150,19 +150,19 @@ class _adicionarState extends State<adicionar> {
                             borderSide: BorderSide.none, // Remove a borda padrão
                           ),
                         ),
-                        style: TextStyle(fontSize: 16), // Estilo do texto digitado
+                        style: const TextStyle(fontSize: 16), // Estilo do texto digitado
                       ),
                     ),
 
                     const SizedBox(height: 20),
-                    Text('Endereço',
+                    const Text('Endereço',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
                       ),
                     ),
                     ConstrainedBox(
-                      constraints: BoxConstraints(
+                      constraints: const BoxConstraints(
                         maxWidth: 450, // Largura máxima
                       ),
                       child: TextField(
@@ -174,13 +174,13 @@ class _adicionarState extends State<adicionar> {
                             borderSide: BorderSide.none, // Remove a borda padrão
                           ),
                         ),
-                        style: TextStyle(fontSize: 16), // Estilo do texto digitado
+                        style: const TextStyle(fontSize: 16), // Estilo do texto digitado
                       ),
                     ),
 
                     const SizedBox(height: 20),
 
-                    Text('Ponto de Parada Ativo',
+                    const Text('Ponto de Parada Ativo',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
@@ -199,7 +199,7 @@ class _adicionarState extends State<adicionar> {
 
                     const SizedBox(height: 20),
 
-                    Text('Imagem da parada',
+                    const Text('Imagem da parada',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
@@ -213,35 +213,80 @@ class _adicionarState extends State<adicionar> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,
                         foregroundColor: Colors.blueAccent,
-                        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      child: Text('Upload de Arquivo'),
+                      child: const Text('Upload de Arquivo'),
                     ),
                     if (_filePath != null) ...[
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       Text('Arquivo Selecionado:\n$_filePath'),
-                      SizedBox(height: 20),
-                     /* ElevatedButton(
+                      const SizedBox(height: 20),
+                      ElevatedButton(
                           onPressed: _isUploading ? null : _uploadFile,
                           child: _isUploading
                       ? CircularProgressIndicator(color: Colors.white)
                       : Text('Enviar Arquivo'),
-                      ),*/
+                      ),
                     ],
 
                     const SizedBox(height: 20),
 
-                    Text('teste',
+                    const Text(
+                      'Tipo Mobiliário',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
                       ),
                     ),
                     ConstrainedBox(
-                      constraints: BoxConstraints(
+                      constraints: const BoxConstraints(
+                        maxWidth: 450, // Largura máxima
+                      ),
+                      child: DropdownButtonFormField<String>(
+                        decoration: InputDecoration(
+                          filled: true, // preenchimento do fundo
+                          fillColor: Colors.white, // Define o fundo branco
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8), // Bordas arredondadas
+                            borderSide: BorderSide.none, // Remove a borda padrão
+                          ),
+                        ),
+                        style: const TextStyle(fontSize: 16, color: Colors.black), // Estilo do texto selecionado
+                        value: 'Tipo C', // Valor inicial
+                        items: const [
+                          DropdownMenuItem(
+                            value: 'Tipo C',
+                            child: Text('Tipo C'),
+                          ),
+                          DropdownMenuItem(
+                            value: 'Cemusa',
+                            child: Text('Cemusa'),
+                          ),
+                          DropdownMenuItem(
+                            value: 'Padrão 2',
+                            child: Text('Padrão 2'),
+                          ),
+                        ],
+                        onChanged: (value) {
+                          // Lógica ao alterar a opção
+                          print('Selecionado: $value');
+                        },
+                      ),
+                    ),
+
+                    const SizedBox(height: 20),
+
+                    const Text('Sentido',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                      ),
+                    ),
+                    ConstrainedBox(
+                      constraints: const BoxConstraints(
                         maxWidth: 450, // Largura máxima
                       ),
                       child: TextField(
@@ -253,16 +298,15 @@ class _adicionarState extends State<adicionar> {
                             borderSide: BorderSide.none, // Remove a borda padrão
                           ),
                         ),
-                        style: TextStyle(fontSize: 16), // Estilo do texto digitado
+                        style: const TextStyle(fontSize: 16), // Estilo do texto digitado
                       ),
                     ),
 
-
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
 
                     ElevatedButton(
                       onPressed: () {
-                        print('teste botao');
+                        print('ta salvo');
                       },
                       style: ElevatedButton.styleFrom( //estilização do botão
                         backgroundColor: Colors.amber[300],
