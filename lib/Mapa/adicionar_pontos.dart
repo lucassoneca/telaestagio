@@ -1,7 +1,6 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'dart:io';
 
 class adicionar extends StatefulWidget {
   const adicionar({super.key});

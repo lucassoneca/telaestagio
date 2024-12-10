@@ -231,6 +231,7 @@ class _MapaState extends State<Mapa> {
                                                       TextButton(
                                                         onPressed: () {
                                                           Navigator.of(context).pop();
+                                                          print('desativado');
                                                         },
                                                         child: const Text('Desativar'),
                                                       ),
@@ -238,6 +239,7 @@ class _MapaState extends State<Mapa> {
                                                       TextButton(
                                                         onPressed:() {
                                                           Navigator.of(context).pop();
+                                                          print('ação cancelada');
                                                         },
                                                         child: const Text('Cancelar'),
                                                       ),
