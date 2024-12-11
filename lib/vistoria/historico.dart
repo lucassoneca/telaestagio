@@ -134,6 +134,7 @@ class _historicoState extends State<historico> {
                     color: Colors.black,
                     width: 2.0,
                   ),
+                  borderRadius: BorderRadius.circular(9),
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -232,6 +233,7 @@ class _historicoState extends State<historico> {
                       color: Colors.black,
                       width: 2.0,
                     ),
+                    borderRadius: BorderRadius.circular(9),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start, // Alinha o texto à esquerda
@@ -281,6 +283,7 @@ class _historicoState extends State<historico> {
                       color: Colors.black,
                       width: 2.0,
                     ),
+                    borderRadius: BorderRadius.circular(9),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start, // Alinha o texto à esquerda

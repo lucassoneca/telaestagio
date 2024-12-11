@@ -1,6 +1,7 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:telaestagio/vistoria/mobiliario.dart';
 
 class adicionar extends StatefulWidget {
   const adicionar({super.key});
@@ -305,7 +306,7 @@ class _adicionarState extends State<adicionar> {
 
                     ElevatedButton(
                       onPressed: () {
-                        print('ta salvo');
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const mobiliario()));
                       },
                       style: ElevatedButton.styleFrom( //estilização do botão
                         backgroundColor: Colors.amber[300],
@@ -315,7 +316,7 @@ class _adicionarState extends State<adicionar> {
                         ),
                       ),
                       child: const Text(
-                        "Salvar",
+                        "PRÓXIMO",
                         style: TextStyle(
                           color: Colors.blue,
                           fontSize: 18,
