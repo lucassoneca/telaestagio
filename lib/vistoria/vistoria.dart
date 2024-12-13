@@ -11,16 +11,18 @@ class _vistoriaState extends State<vistoria> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Vistoria",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
+        backgroundColor: Colors.blue,
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Ícone de voltar no topo
-          IconButton(
-            icon: const Icon(Icons.arrow_back, color: Colors.indigo),
-            onPressed: () {
-              Navigator.pop(context); // Voltar à tela anterior
-            },
-          ),
           // Espaço entre o ícone e a box azul
           const SizedBox(height: 20),
           // Centraliza a box azul

@@ -1,6 +1,5 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:telaestagio/vistoria/mobiliario.dart';
 
 class adicionar extends StatefulWidget {
@@ -14,9 +13,6 @@ class _adicionarState extends State<adicionar> {
   bool isChecked = false; //estado inicial do checkbox
   String? _filePath; // Armazena o caminho do arquivo selecionado
   bool _isUploading = false; // Indica se o upload está em progresso
-  final TextEditingController _controller = TextEditingController();
-  final List<String> _options = ['Opção 1', 'Opção 2', 'Opção 3', 'Opção 4'];
-  String? _selectedOption;
 
   // Função para selecionar o arquivo
   Future<void> _selectFile() async {
@@ -41,49 +37,23 @@ class _adicionarState extends State<adicionar> {
     setState(() {
       _isUploading = true;
     });
-
-    try {
-      var request = http.MultipartRequest(
-        'POST',
-        Uri.parse('https://example.com/upload'), // URL do seu endpoint
-      );
-      request.files.add(await http.MultipartFile.fromPath('file', _filePath!));
-
-      var response = await request.send();
-
-      if (response.statusCode == 200) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Arquivo enviado com sucesso!')),
-        );
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Falha no upload. Código: ${response.statusCode}')),
-        );
-      }
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Erro: $e')),
-      );
-    } finally {
-      setState(() {
-        _isUploading = false;
-      });
-    }
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Pontos de Parada",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
+        backgroundColor: Colors.blue,
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Ícone de voltar no topo
-          IconButton(
-            icon: const Icon(Icons.arrow_back, color: Colors.indigo),
-            onPressed: () {
-              Navigator.pop(context); // Voltar à tela anterior
-            },
-          ),
           // Espaço entre o ícone e a box azul
           const SizedBox(height: 20),
           // Centraliza a box azul
